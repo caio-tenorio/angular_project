@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Hero } from '../hero';
 import { NgFormModule } from '../ngform.module';
+import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-heroes',
