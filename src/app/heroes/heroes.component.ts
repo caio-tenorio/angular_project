@@ -1,18 +1,25 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgFor } from '@angular/common';
 import { Hero } from '../hero';
 import { NgFormModule } from '../ngform.module';
+import {HEROES} from '../mock-heroes';
 
 @Component({
   selector: 'app-heroes',
   standalone: true,
-  imports: [CommonModule, NgFormModule],
+  imports: [CommonModule, NgFormModule, NgFor],
   templateUrl: './heroes.component.html',
   styleUrl: './heroes.component.css'
 })
 export class HeroesComponent {
-  hero: Hero = {
-    id: 1,
-    name: 'Windstorm'
-  };
+  heroes = HEROES;
+
+  selectedHero?: Hero;
+  onSelect(hero: Hero): void {
+    if(hero === this.selectedHero) {
+      this.selectedHero = undefined;
+      return;
+    }
+    this.selectedHero = hero;
+  }
 }
