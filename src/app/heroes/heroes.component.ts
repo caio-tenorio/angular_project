@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { CommonModule, NgFor } from '@angular/common';
 import { Hero } from '../hero';
 import { HeroService } from '../hero.service';
 import { NgFormModule } from '../ngform.module';
 import { HeroDetailComponent } from '../hero-detail/hero-detail.component';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-heroes',
@@ -13,7 +15,7 @@ import { HeroDetailComponent } from '../hero-detail/hero-detail.component';
   styleUrl: './heroes.component.css'
 })
 export class HeroesComponent {
-  constructor(private heroService: HeroService) {}
+  constructor(private heroService: HeroService, private toastr: ToastrService) {}
   heroes: Hero[] = [];
 
   ngOnInit(): void {
@@ -32,5 +34,6 @@ export class HeroesComponent {
       return;
     }
     this.selectedHero = hero;
+    this.toastr.success("Hero " + this.selectedHero.name + " was selected!");
   }
 }
