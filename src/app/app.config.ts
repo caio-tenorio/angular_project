@@ -6,6 +6,7 @@ import { provideClientHydration } from '@angular/platform-browser';
 import { provideAnimations } from '@angular/platform-browser/animations';
 
 import { provideToastr } from 'ngx-toastr';
+import { provideHttpClient, withFetch } from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes),
@@ -16,5 +17,7 @@ export const appConfig: ApplicationConfig = {
       positionClass: 'bottom-right',
       preventDuplicates: true,
       toastClass: 'alert alert-success alert-dismissible fade show'
-  })]
+    }),
+    provideHttpClient(withFetch())
+]
 };
