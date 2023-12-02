@@ -7,10 +7,10 @@ import { Observable, of } from 'rxjs';
   providedIn: 'root'
 })
 export class HeroService {
+  constructor() { }
+
   getHeroes(): Observable<Hero[]> {
     const heroes = of(HEROES);
     return heroes;
   }
-
-  constructor() { }
 }

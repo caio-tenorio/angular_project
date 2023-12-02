@@ -1,3 +1,4 @@
+import { SpotifyPlaylistsService } from './../../services/spotifyPlaylists.service';
 import { Component } from '@angular/core';
 import { CommonModule, NgFor } from '@angular/common';
 import { Hero } from '../../interfaces/hero';
@@ -23,7 +24,7 @@ export class HeroesComponent {
     private spotifyAuthService: SpotifyAuthService,
     private router: Router) {}
   heroes: Hero[] = [];
-
+  selectedHero?: Hero;
 
   ngOnInit(): void {
     this.getHeroes();
@@ -34,12 +35,13 @@ export class HeroesComponent {
         .subscribe(heroes => this.heroes = heroes);
   }
 
-  selectedHero?: Hero;
   onSelect(hero: Hero): void {
     this.spotifyAuthService.getAuthorizationURI().subscribe((data: AuthorizationCodeUriResponse) => {
       console.log(data.uri)
       if(data != null && data.uri !== null) {
-        window.open(data.uri, '_blank')?.focus()
+        window.location.href = data.uri
+        // window.open(data.uri, '_blank')?.focus()
+
       }
     })
 
