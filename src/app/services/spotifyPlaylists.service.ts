@@ -8,13 +8,14 @@ import { isPlatformBrowser } from '@angular/common';
   providedIn: 'root'
 })
 export class SpotifyPlaylistsService {
-  isBrowser: boolean;
+  private readonly ENDPOINT: string = environment.serverUrl + "/v1/spotify/me"
+  private readonly PLAYLISTS_ENDPOINT: string = this.ENDPOINT + "/playlists";
+
+  private isBrowser: boolean;
 
   constructor(private http: HttpClient, @Inject(PLATFORM_ID) private platformId: Object) {
     this.isBrowser = isPlatformBrowser(this.platformId)
   }
-
-  private endpoint: string = environment.serverUrl + "/v1/spotify/me"
 
   getCurrentUserPlaylists(): Observable<any> {
     if (this.isBrowser) {
@@ -28,7 +29,7 @@ export class SpotifyPlaylistsService {
         .set('accessToken', spotifyAccessToken)
         .set('refreshToken', spotifyRefreshToken);
 
-      return this.http.get(this.endpoint + "/playlists", { params })
+      return this.http.get(this.PLAYLISTS_ENDPOINT, { params })
     } else {
       throw new Error('Server side')
     }

@@ -36,12 +36,10 @@ export class HeroesComponent {
   }
 
   onSelect(hero: Hero): void {
-    this.spotifyAuthService.getAuthorizationURI().subscribe((data: AuthorizationCodeUriResponse) => {
-      console.log(data.uri)
-      if(data != null && data.uri !== null) {
-        window.location.href = data.uri
-        // window.open(data.uri, '_blank')?.focus()
-
+    this.spotifyAuthService.getAuthorizationURI().subscribe((response: AuthorizationCodeUriResponse) => {
+      console.log(response.uri)
+      if(response != null && response.uri !== null) {
+        window.location.href = response.uri
       }
     })
 
